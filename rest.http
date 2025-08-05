@@ -1,0 +1,19 @@
+@baseUrl = http://localhost:4000
+@apiUrl = {{baseUrl}}/api/v1
+
+###
+//get request
+GET {{baseUrl}}
+
+###
+POST {{apiUrl}}/auth/register
+Content-Type: application/json
+
+{
+    "fName": "ram",
+    "lName": "dev",
+    "phone": "232323",
+    "email": "ram1@mail.com",
+    "password": "1234"
+
+}

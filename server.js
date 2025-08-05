@@ -1,20 +1,21 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import mongoDBConnection from "./src/config/mongoConfig.js";
 import { config } from "./src/config/config.js";
+import authRouter from "./src/routes/authRouter.js";
 
-dotenv.config();
 const app = express();
 
 // GET PORT
-const PORT = config.port || 8000;
+const PORT = config.port;
 
 //cors
 app.use(cors());
 
 // request body
 app.use(express.json());
+
+app.use("/api/v1/auth", authRouter);
 
 // ROUTES
 app.get("/", (req, res) => {
@@ -30,13 +31,13 @@ mongoDBConnection()
   .then(() => {
     app.listen(PORT, (err) => {
       if (err) {
-        console.log("Server could not be started");
+        console.log("SERVER COULD NOT BE STARTED");
       } else {
-        console.log("server started at port:", PORT);
+        console.log("SERVER STARTED AT PORT:", PORT);
       }
     });
   })
   .catch((err) => {
     console.log(err.message);
-    console.log("MOngo db connection error");
+    console.log("MONGO DB CONNECTION ERROR");
   });
